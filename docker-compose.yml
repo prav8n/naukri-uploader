@@ -1,0 +1,14 @@
+services:
+  naukri-uploader:
+    build: .
+    container_name: naukri-uploader
+    restart: unless-stopped
+    environment:
+      - NAUKRI_EMAIL=${NAUKRI_EMAIL}
+      - NAUKRI_PASSWORD=${NAUKRI_PASSWORD}
+      - RESUME_PATH=/app/resume/Praveen_Choudhary_Data_Scientist.pdf
+      - RUN_ON_START=false  # set to "true" to also upload immediately on start
+      - TZ=Asia/Kolkata      
+    volumes:
+      - ./resume:/app/resume:ro   # put your resume PDF here
+      - ./logs:/app/logs          # logs persist on host

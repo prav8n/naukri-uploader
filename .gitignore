@@ -1,0 +1,10 @@
+# Secrets — never commit
+.env
+
+# Your actual resume + any generated PDFs
+resume/*.pdf
+
+# Runtime logs and error screenshots
+logs/
+
+__pycache__/
