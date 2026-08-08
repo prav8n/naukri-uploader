@@ -14,14 +14,14 @@ CRON_TZ=Asia/Kolkata
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# Daily at 8:00 AM IST
-0 8 * * * root source /etc/environment && /usr/local/bin/python /app/upload_resume.py >> /app/logs/cron.log 2>&1
+# Daily at 8:08 AM IST
+8 8 * * * root source /etc/environment && /usr/local/bin/python /app/upload_resume.py >> /app/logs/cron.log 2>&1
 EOF
 
 chmod 0644 /etc/cron.d/naukri-upload
 crontab /etc/cron.d/naukri-upload
 
-echo "Cron job registered. Next run: 08:00 AM IST daily."
+echo "Cron job registered. Next run: 08:08 AM IST daily."
 echo "Logs will be written to /app/logs/upload.log and /app/logs/cron.log"
 
 # Run once immediately on container start (optional — comment out if not needed)
