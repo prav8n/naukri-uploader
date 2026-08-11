@@ -23,7 +23,7 @@ naukri-uploader/
 
 ## Setup (One-Time)
 
-### 1. Clone / copy this folder to your Ubuntu laptop
+### 1. Clone / copy this folder
 
 ### 2. Add your resume
 ```bash
