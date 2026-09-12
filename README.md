@@ -1,6 +1,6 @@
 # Naukri Resume Auto-Uploader 🤖
 
-Uploads your resume to Naukri daily at **8:08 AM IST** automatically using Selenium + Docker.
+Uploads your resume to Naukri twice daily at **9:30 AM and 2:30 PM IST** automatically using Selenium + Docker.
 
 ---
 
@@ -42,7 +42,7 @@ nano .env   # fill in NAUKRI_EMAIL and NAUKRI_PASSWORD
 docker compose up -d --build
 ```
 
-That's it. The container will stay alive and upload every day at 8:08 AM IST.
+That's it. The container will stay alive and upload every day at 9:30 AM and 2:30 PM IST.
 
 ---
 
@@ -85,11 +85,12 @@ docker compose down --rmi all   # stop + remove image
 
 ## Cron Schedule Reference
 
-The cron runs at **02:38 UTC = 08:08 AM IST**.
+The cron entry is `30 9,14 * * *` with `CRON_TZ=Asia/Kolkata` — i.e. **9:30 AM and 2:30 PM IST**
+(04:00 and 09:00 UTC).
 
-If you're in a different timezone, edit the cron line in `Dockerfile` or `entrypoint.sh`:
+If you're in a different timezone, edit the cron line in `entrypoint.sh`:
 ```
-38 2 * * *    →  MM HH * * *   (UTC time)
+30 9,14 * * *    →  MM HH[,HH] * * *   (interpreted in CRON_TZ)
 ```
 
 ---

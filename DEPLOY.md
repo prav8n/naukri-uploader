@@ -1,7 +1,7 @@
 # Deploying to Oracle Cloud (Ampere A1 / ARM64)
 
 This runs the uploader 24/7 on your LedgerIQ Oracle VM so your laptop doesn't
-have to be on. It fires **daily at 8:00 AM IST** and uses whatever PDF is sitting
+have to be on. It fires **daily at 9:30 AM and 2:30 PM IST** and uses whatever PDF is sitting
 at `resume/Praveen_Choudhary_Data_Scientist.pdf` on the VM at that moment.
 
 > **Why the code changed:** Oracle Ampere A1 is ARM64. The old Dockerfile
@@ -90,10 +90,10 @@ only makes outbound connections, so you don't touch Oracle's security lists.
 
 ```bash
 docker ps                                   # container should be "Up"
-docker exec naukri-uploader crontab -l      # shows: 0 8 * * *  (CRON_TZ=Asia/Kolkata)
+docker exec naukri-uploader crontab -l      # shows: 30 9,14 * * *  (CRON_TZ=Asia/Kolkata)
 docker exec naukri-uploader date            # should print IST
 
-# Force an upload right now instead of waiting for 8 AM:
+# Force an upload right now instead of waiting for the next scheduled run:
 docker exec naukri-uploader bash -c "source /etc/environment && python /app/upload_resume.py"
 
 # Watch logs
@@ -113,10 +113,10 @@ scp /path/to/new_resume.pdf \
 ```
 
 The resume folder is volume-mounted into the container, so this **overwrites the
-old file in place** — no rebuild, no restart. The next 8:00 AM run uploads the new
-version automatically.
+old file in place** — no rebuild, no restart. The next scheduled run (9:30 AM or
+2:30 PM IST) uploads the new version automatically.
 
-Want it live on Naukri immediately (don't wait for 8 AM)? Follow the scp with:
+Want it live on Naukri immediately (don't wait for the next run)? Follow the scp with:
 
 ```bash
 ssh ubuntu@<YOUR_VM_PUBLIC_IP> \
